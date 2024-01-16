@@ -1,14 +1,152 @@
 // 1. Create a JavaScript function that takes an array of numbers and returns their sum.
 
+// ______________________ Folosind for clasic ______________________
+
+// const calcSum = function (arr) {
+//   let sum = 0;
+//   for (let i = 0; i < arr.length; i++) {
+//     sum += arr[i];
+//   }
+
+//   return sum;
+// };
+
+// ______________________ Folosind forEach ______________________
+
+// const calcSum = function (arr) {
+//   let sum = 0;
+//   arr.forEach(nr => (sum += nr));
+
+//   return sum;
+// };
+
+// ______________________ Folosind reduce ______________________
+
+const calcSum = arr => arr.reduce((acc, cur) => acc + cur, 0);
+
+console.log("Exercise 1 result:", calcSum([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]));
+
 // 2. Write a JavaScript function that receives an array of numbers and determines the smallest and largest numbers in it.
 
+// const minOrMax = function (arr) {
+//   let minNum = 0;
+//   let maxNum = 0;
+
+//   for (let i = 0; i < arr.length; i++) {
+//     if (arr[i] > maxNum) {
+//       maxNum = arr[i];
+//     }
+//     if (arr[i] < minNum) {
+//       minNum = arr[i];
+//     }
+//   }
+
+//   return `The smallest number is ${minNum}, and the largest is ${maxNum}.`;
+// };
+
+// ______________________ Folosind forEach + Turnary Operator ______________________
+
+const minOrMax = function (arr) {
+  if (arr.lenght === 0) {
+    return "Array is empty.";
+  }
+
+  let result = "";
+  let minNum = arr[0];
+  let maxNum = arr[0];
+
+  arr.forEach(el => {
+    maxNum = el > maxNum ? el : maxNum;
+    minNum = el < minNum ? el : minNum;
+  });
+
+  return `The smallest number is ${minNum}, and the largest is ${maxNum}.`;
+};
+
+console.log("Exercise 2 result:", minOrMax([-3, 4, 0, -375, 17, 5, 47, 9]));
+
 // 3. Implement a JavaScript function that takes a string and checks if it is a palindrome.
+// ❓ Palindrom - a sequence of characters that reads the same forwards and backward
+
+const isPalindrom = str =>
+  str.split("").reverse().join("") === str ? `${str} is a Palindrom.` : `${str} is not a Palindrom.`;
+isPalindrom("exemplu");
+
+console.log("Exercise 3 result:", isPalindrom("radar"));
 
 // 4. Develop a JavaScript function that takes a string and counts the vowels in it.
 
+// const countVowels = function (word) {
+//   const vowels = ["a", "e", "i", "o", "u", "ă", "î", "â"];
+
+//   let counts = 0;
+//   const wordToLowerCase = word.toLowerCase();
+
+//   for (let i = 0; i < wordToLowerCase.length; i++) {
+//     if (vowels.includes(wordToLowerCase[i])) {
+//       counts++;
+//     }
+//   }
+
+//   return `${word} contains ${counts} vowels in it.`;
+// };
+
+// ______________________ Folosind forEach + Turnary Operator ______________________
+
+const countVowels = function (word) {
+  const vowels = ["a", "e", "i", "o", "u", "ă", "î", "â"];
+
+  let counts = 0;
+  wordToLowerCase = word
+    .toLowerCase()
+    .split("")
+    .forEach(letter => {
+      if (vowels.includes(letter)) {
+        counts++;
+      }
+    });
+
+  return `${word} contains ${counts} vowels in it.`;
+};
+
+console.log("Exercise 4 result:", countVowels("example"));
+
 // 5. Build a JavaScript function that takes a number and determines whether it is prime or not.
 
+function isPrime(num) {
+  if (num < 2) {
+    return false;
+  }
+
+  for (let i = 2; i <= Math.sqrt(num); i++) {
+    if (num % i === 0) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+console.log("Exercise 5 result:", isPrime(7));
+
 // 6. Construct a JavaScript function that takes a number and an array of numbers, and checks if the number is present in the array.
+
+// const checkNum = function (num, arr) {
+//   for (let i = 0; i < arr.length; i++) {
+//     if (arr[i] === num) {
+//       return `${num} is present in [${arr}]`;
+//     } else {
+//       return `${num} is not present in [${arr}]`;
+//     }
+//   }
+// };
+
+// ______________________ Refactored Code ______________________
+
+const checkNum = (num, arr) =>
+  arr.includes(num) ? `${num} is present in [${arr}]` : `${num} is not present in [${arr}]`;
+
+console.log("Exercise 6 result:", checkNum(1, [1, 2, 3, 4, 5, 6, 7]));
 
 // 7. Create a JavaScript function that takes a number and returns its factorial.
 
