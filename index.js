@@ -11,7 +11,7 @@
 //   return sum;
 // };
 
-// ______________________ Folosind forEach ______________________
+// ______________________ Folosind .forEach() ______________________
 
 // const calcSum = function (arr) {
 //   let sum = 0;
@@ -20,7 +20,7 @@
 //   return sum;
 // };
 
-// ______________________ Folosind reduce ______________________
+// ______________________ Folosind .reduce() ______________________
 
 const calcSum = arr => arr.reduce((acc, cur) => acc + cur, 0);
 
@@ -44,7 +44,7 @@ console.log("Exercise 1 result:", calcSum([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]));
 //   return `The smallest number is ${minNum}, and the largest is ${maxNum}.`;
 // };
 
-// ______________________ Folosind forEach + Turnary Operator ______________________
+// ______________________ Folosind .forEach() + Turnary Operator ______________________
 
 const minOrMax = function (arr) {
   if (arr.lenght === 0) {
@@ -91,7 +91,7 @@ console.log("Exercise 3 result:", isPalindrom("radar"));
 //   return `${word} contains ${counts} vowels in it.`;
 // };
 
-// ______________________ Folosind forEach + Turnary Operator ______________________
+// ______________________ Folosind .forEach() + Turnary Operator ______________________
 
 const countVowels = function (word) {
   const vowels = ["a", "e", "i", "o", "u", "ă", "î", "â"];
@@ -152,83 +152,202 @@ console.log("Exercise 6 result:", checkNum(1, [1, 2, 3, 4, 5, 6, 7]));
 
 // 8. Design a JavaScript function that takes an array of numbers and returns the first duplicate element. If no duplicate exists, return null.
 
+const firstDuplicate = function (arr) {
+  if (!arr.length) return;
+
+  let uniqueNumbers = [];
+
+  for (let i = 0; i < arr.length; i++) {
+    if (uniqueNumbers.includes(arr[i])) {
+      return `First duplicate element is ${arr[i]}`;
+    } else {
+      uniqueNumbers.push(arr[i]);
+    }
+  }
+};
+
+console.log("Exercise 8 result:", firstDuplicate([1, 2, 3, 4, 5, 6, 7, 5, 8, 9, 9, 7]));
+
 // 9. Develop a JavaScript function that takes an array of numbers and returns the reversed array.
+
+// const reverseArr = function (arr) {
+//   let result = [];
+//   for (let i = arr.length - 1; i >= 0; i--) {
+//     result.push(arr[i]);
+//   }
+
+//   return result;
+// };
+
+// ______________________ Folosind .reverse() ______________________
+
+const reverseArr = arr => arr.reverse();
+
+console.log("Exercise 9 result:", reverseArr([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]));
 
 // 10. Write a JavaScript function that takes an array of numbers and returns the element that appears most frequently in the array.
 
 // 11. Create a JavaScript function that takes a number as an argument and returns an array with all its divisors.
+// ❓ Divizor - un numar care impartit la alt numar da restul zero (PS: orice numar are divizor pe el insusi)
+
+const allDivisors = function (num) {
+  let divisors = [];
+
+  for (let i = 1; i <= num; i++) {
+    if (num % i === 0) {
+      divisors.push(i);
+    }
+  }
+
+  return `Toti divizorii lui ${num} sunt ${[...divisors]}`;
+};
+
+console.log("Exercise 11 result:", allDivisors(18));
 
 // 12. Develop a JavaScript function that takes an array as an argument and returns a new array with duplicate elements removed.
 
+// const removeDuplicates = function (arr) {
+//   let uniqueValues = [];
+
+//   for (let i = 0; i < arr.length; i++) {
+//     if (!uniqueValues.includes(arr[i])) {
+//       uniqueValues.push(arr[i]);
+//     }
+//   }
+
+//   return uniqueValues;
+// };
+
+// ______________________ Folosind .map() + Turnary Operator ______________________
+
+// const removeDuplicates = arr => {
+//   let uniqueValues = [];
+//   arr.map(el => (uniqueValues.includes(el) ? uniqueValues : uniqueValues.push(el)));
+//   return uniqueValues;
+// };
+
+// ______________________ Folosind new Set() + Array.from ______________________
+
+const removeDuplicates = arr => Array.from(new Set(arr));
+
+console.log("Exercise 12 result:", removeDuplicates([1, 2, 3, 3, 4, 5, 6, 6, 6, 7, 8, 4, 7, 5, 8, 9, 10]));
+
 // 13. Write a JavaScript function that takes an array of numbers and transforms it into a string with elements separated by commas.
 
-// 14. Implement a function that extracts elements from an array satisfying a specific condition.
+const toString = arr => arr.slice(" ").join(",");
 
-// 15. Create a JavaScript function that takes an array of numbers and sorts it in ascending or descending order.
+console.log("Exercise 13 result:", toString([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]));
 
-// 16. Develop a JavaScript function that takes two strings as arguments and returns the number of occurrences of the second string in the first.
+// 14. Create a JavaScript function that takes an array of numbers and sorts it in ascending or descending order.
 
-// 17. Design a JavaScript function that takes a string as an argument and returns a new string where uppercase letters are converted to lowercase and vice versa.
+const sortNumbers = function (arr, order) {
+  if (order === "asc") {
+    return arr.sort((a, b) => a - b);
+  } else if (order === "desc") {
+    return arr.sort((a, b) => b - a);
+  } else {
+    return `Nu ai oferit toate datele`;
+  }
+};
 
-// 18. Craft a JavaScript function that takes a string as an argument and returns a new string obtained by reversing the order of words.vintelor
+console.log("Exercise 14 result:", sortNumbers([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], "desc"));
 
-// 19. Create a function that accesses properties of an object and extracts their values.
+// 15. Develop a JavaScript function that takes two strings as arguments and returns the number of occurrences of the second string in the first.
 
-// 20. Develop a constructor function named "Book" that takes parameters "title" and "author" and creates an object with these properties.
+const occurrences = function (str1, str2) {
+  const occurrence = str1.split(str2);
+  const result = occurrence.length - 1;
+  return `${str2} appears ${result} times in '${str1}'`;
+};
 
-// 21. Create an object named "grupStudenti" that will contain a list of students represented as objects. Each student object should have two properties: "nume" (representing the student's name) and "note" (a list of numbers representing the student's grades). Implement a method called "calculeazaMedie" within this object that calculates the average grades for each student and displays the results.
+console.log("Exercise 15 result:", occurrences("This is an example for this exercise. This", "This"));
 
-// 22. Create an array of objects named "products" containing items with properties "name" and "price." Write a JavaScript function to sort these products in ascending order based on their prices.
+// 16. Design a JavaScript function that takes a string as an argument and returns a new string where uppercase letters are converted to lowercase and vice versa.
 
-// 23. Explore the use of async/await in JavaScript to make HTTP requests to an API and handle the received data.
+// const viceVersa = function (str) {
+//   let result = [];
 
-// 24. Create a function that takes two arrays of numbers as arguments and checks if they share at least one common element.
+//   for (let i = 0; i < str.length; i++) {
+//     if (str[i].toLowerCase() === str[i]) {
+//       result.push(str[i].toUpperCase());
+//     } else if (str[i].toUpperCase() === str[i]) {
+//       result.push(str[i].toLowerCase());
+//     }
+//   }
 
-// 25. Develop a function to calculate the sum of elements in an array object. Note that the array can contain other objects.
+//   return result.join("");
+// };
 
-// 26. Implement a function that sorts an array of objects based on a specific property.
+// ______________________ Folosind .map() + Turnary Operator ______________________
 
-// 27. Implement a JavaScript function to sort an array of objects based on a specific property.
+const viceVersa = function (str) {
+  return str
+    .split("")
+    .map(el => (el === el.toLowerCase() ? el.toUpperCase() : el.toLowerCase()))
+    .join("");
+};
 
-// 28. Create a JavaScript function to find and return the most frequently occurring element in an array.
+console.log("Exercise 16 result:", viceVersa("ViCe VerSA"));
 
-// 29. Implement a function that takes a number as an argument and returns true if it is a perfect number; otherwise, return false.
+// 17. Craft a JavaScript function that takes a string as an argument and returns a new string obtained by reversing the order of words.vintelor
 
-// 30. Create a JavaScript function that find and return the longest word in a string.
+// 18. Create a function that accesses properties of an object and extracts their values.
 
-// 31. Create a function that takes an array of numbers and finds the largest prime number in it.
+// 19. Develop a constructor function named "Book" that takes parameters "title" and "author" and creates an object with these properties.
 
-// 32. Design a function that removes all duplicate elements from an array, keeping only the first occurrence of each element.
+// 20. Create an object named "grupStudenti" that will contain a list of students represented as objects. Each student object should have two properties: "nume" (representing the student's name) and "note" (a list of numbers representing the student's grades). Implement a method called "calculeazaMedie" within this object that calculates the average grades for each student and displays the results.
+
+// 21. Create an array of objects named "products" containing items with properties "name" and "price." Write a JavaScript function to sort these products in ascending order based on their prices.
+
+// 22. Explore the use of async/await in JavaScript to make HTTP requests to an API and handle the received data.
+
+// 23. Create a function that takes two arrays of numbers as arguments and checks if they share at least one common element.
+
+// 24. Develop a function to calculate the sum of elements in an array object. Note that the array can contain other objects.
+
+// 25. Implement a function that sorts an array of objects based on a specific property.
+
+// 26. Implement a JavaScript function to sort an array of objects based on a specific property.
+
+// 27. Create a JavaScript function to find and return the most frequently occurring element in an array.
+
+// 28. Implement a function that takes a number as an argument and returns true if it is a perfect number; otherwise, return false.
+
+// 29. Create a JavaScript function that find and return the longest word in a string.
+
+// 30. Create a function that takes an array of numbers and finds the largest prime number in it.
+
+// 31. Design a function that removes all duplicate elements from an array, keeping only the first occurrence of each element.
 
 // 32. Implement a function to check if a given number is a Fibonacci number.
 
-// 34. Write a program that finds the summation of every number from 1 to num. The number will always be a positive integer greater than 0.
+// 33. Write a program that finds the summation of every number from 1 to num. The number will always be a positive integer greater than 0.
 
-// 35. You are going to be given a word. Your job is to return the middle character of the word. If the word's length is odd, return the middle character. If the word's length is even, return the middle 2 characters.
+// 34. You are going to be given a word. Your job is to return the middle character of the word. If the word's length is odd, return the middle character. If the word's length is even, return the middle 2 characters.
+
+// 35. Given two integers a and b, which can be positive or negative, find the sum of all the integers between and including them and return it. If the two numbers are equal return a or b.
 
 // 36. Given two integers a and b, which can be positive or negative, find the sum of all the integers between and including them and return it. If the two numbers are equal return a or b.
 
-// 37. Given two integers a and b, which can be positive or negative, find the sum of all the integers between and including them and return it. If the two numbers are equal return a or b.
+// 37. Given a string, you have to return a string in which each character (case-sensitive) is repeated once.
 
-// 38. Given a string, you have to return a string in which each character (case-sensitive) is repeated once.
+// 38. Given an array of integers as strings and numbers, return the sum of the array values as if all were numbers. Return your answer as a number.
 
-// 39. Given an array of integers as strings and numbers, return the sum of the array values as if all were numbers. Return your answer as a number.
-
-// 40. Write a function that takes an array of numbers (integers for the tests) and a target number. It should find two different items in the array that, when added together, give the target value. The indices of these items should then be returned in a tuple / list (depending on your language) like so: (index1, index2).
+// 39. Write a function that takes an array of numbers (integers for the tests) and a target number. It should find two different items in the array that, when added together, give the target value. The indices of these items should then be returned in a tuple / list (depending on your language) like so: (index1, index2).
 
 // For the purposes of this kata, some tests may have multiple answers; any valid solutions will be accepted.
 
 // The input will always be valid (numbers will be an array of length 2 or greater, and all of the items will be numbers; target will always be the sum of two different items from that array).
 
-// 41. The goal of this exercise is to convert a string to a new string where each character in the new string is "(" if that character appears only once in the original string, or ")" if that character appears more than once in the original string. Ignore capitalization when determining if a character is a duplicate.
+// 40. The goal of this exercise is to convert a string to a new string where each character in the new string is "(" if that character appears only once in the original string, or ")" if that character appears more than once in the original string. Ignore capitalization when determining if a character is a duplicate.
 
-// 42. Define String.prototype.toAlternatingCase (or a similar function/method such as to_alternating_case/toAlternatingCase/ToAlternatingCase in your selected language; see the initial solution for details) such that each lowercase letter becomes uppercase and each uppercase letter becomes lowercase. For example:
+// 41. Define String.prototype.toAlternatingCase (or a similar function/method such as to_alternating_case/toAlternatingCase/ToAlternatingCase in your selected language; see the initial solution for details) such that each lowercase letter becomes uppercase and each uppercase letter becomes lowercase. For example:
 
-// 43. You are given an odd-length array of integers, in which all of them are the same, except for one single number. Complete the method which accepts such an array, and returns that single different number.
+// 42. You are given an odd-length array of integers, in which all of them are the same, except for one single number. Complete the method which accepts such an array, and returns that single different number.
 
-// 44. You will be given an array of numbers. You have to sort the odd numbers in ascending order while leaving the even numbers at their original positions.
+// 43. You will be given an array of numbers. You have to sort the odd numbers in ascending order while leaving the even numbers at their original positions.
 
-// 45. Given a string of words, you need to find the highest scoring word. Each letter of a word scores points according to its position in the alphabet: a = 1, b = 2, c = 3 etc.
+// 44. Given a string of words, you need to find the highest scoring word. Each letter of a word scores points according to its position in the alphabet: a = 1, b = 2, c = 3 etc.
 
 // For example, the score of abad is 8 (1 + 2 + 1 + 4).
 
