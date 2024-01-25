@@ -378,9 +378,52 @@ console.log("Exercise 27 result:", isItPerfectNum(28));
 
 // 28. Create a JavaScript function that find and return the longest word in a string.
 
+const longestWord = function (str) {
+  const toArray = str.split(" ");
+  let longestWord = "";
+
+  for (let i = 0; i < toArray.length; i++) {
+    if (toArray[i].length > longestWord.length) {
+      longestWord = toArray[i];
+    }
+  }
+
+  return `"${longestWord}" este cel mai lung cuvant.`;
+};
+
+console.log("Exercise 28 result:", longestWord("Finde the longest word from this string."));
+
 // 29. Create a function that takes an array of numbers and finds the largest prime number in it.
 
+function isPrime2(num) {
+  if (num < 2) return false;
+
+  for (let i = 2; i <= Math.sqrt(num); i++) {
+    if (num % i === 0) return false;
+  }
+
+  return true;
+}
+
+const largestPrimeNum = function (arr) {
+  let primeNumbers = [];
+
+  for (let i = 0; i < arr.length; i++) {
+    if (isPrime2(arr[i])) {
+      primeNumbers.push(arr[i]);
+    }
+  }
+
+  return primeNumbers.length > 0 ? primeNumbers.sort((a, b) => a - b).pop() : null;
+};
+
+console.log("Exercise 29 result:", largestPrimeNum([10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]));
+
 // 30. Design a function that removes all duplicate elements from an array, keeping only the first occurrence of each element.
+
+const removeDuplicateButFirst = arr => [...new Set(arr)];
+
+console.log("Exercise 30 result:", removeDuplicateButFirst([1, 2, 3, 3, 4, 5, 6, 6, 7, 5, 5, 8, 9, 10, 11, 11]));
 
 // 31. Implement a function to check if a given number is a Fibonacci number.
 
