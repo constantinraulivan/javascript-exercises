@@ -427,9 +427,64 @@ console.log("Exercise 30 result:", removeDuplicateButFirst([1, 2, 3, 3, 4, 5, 6,
 
 // 31. Implement a function to check if a given number is a Fibonacci number.
 
+// ❓ Un număr Fibonacci este un număr într-o secvență numerică numită "șirul lui Fibonacci". În această secvență, fiecare număr este suma celor două numere anterioare.
+
+const fibonacciNum = function (arr, num) {
+  if (!arr.includes(num)) return `${num} nu este inclus în șirul: [${arr}]`;
+  const indexOfNum = arr.findIndex(el => el === num);
+
+  for (let i = 0; i < arr.length; i++) {
+    const sum = arr.at(indexOfNum - 1) + arr.at(indexOfNum - 2);
+
+    if (sum === num) {
+      return `${num} este un număr Fibonacci.`;
+    } else {
+      return `${num} nu este un număr Fibonacci.`;
+    }
+  }
+};
+
+// ______________________ Folosind .slice() + .reduce() ______________________
+
+// function fibonacciNum(arr, num) {
+//   if (num < 2) {
+//     return "Numărul ar trebui sa fie mai mare decât doi.";
+//   }
+
+//   const lastTwoNumbers = arr.slice(num - 2, num);
+//   const sum = lastTwoNumbers.reduce((acc, num) => acc + num, 0);
+
+//   return sum;
+// }
+
+console.log("Exercise 31 result:", fibonacciNum([0, 1, 1, 2, 3, 5, 7, 8, 13, 21, 34], 8));
+
 // 32. Write a program that finds the summation of every number from 1 to num. The number will always be a positive integer greater than 0.
 
+const sumOfNum = function (num) {
+  if (num <= 1) return `${num} trebuie să fie mai mare decât 1.`;
+
+  let sum = 0;
+  for (let i = 0; i <= num; i++) {
+    sum += i;
+  }
+
+  return `Suma numerelor de la 1 la ${num} este ${sum}`;
+};
+
+console.log("Exercise 32 result:", sumOfNum(35));
+
 // 33. You are going to be given a word. Your job is to return the middle character of the word. If the word's length is odd, return the middle character. If the word's length is even, return the middle 2 characters.
+
+const findMiddleCharacter = function (word) {
+  const middle = Math.floor(word.length / 2);
+
+  if (word.length < 2) return;
+
+  return word.length % 2 === 0 ? word[middle - 1] + word[middle] + "" : word[middle];
+};
+
+console.log("Exercise 33 result:", findMiddleCharacter("abcdef1234"));
 
 // 34. Given two integers a and b, which can be positive or negative, find the sum of all the integers between and including them and return it. If the two numbers are equal return a or b.
 
