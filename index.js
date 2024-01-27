@@ -550,18 +550,6 @@ console.log("Exercise 38 result:", convertToNewStr("This is an example."));
 
 // 40. You are given an odd-length array of integers, in which all of them are the same, except for one single number. Complete the method which accepts such an array, and returns that single different number.
 
-// const findeDiferentNum = function (arr) {
-//   const arrWiThoutLastNum = arr[arr.length - 1];
-//   let result = 0;
-//   for (let i = 0; i < arr.length - 1; i++) {
-//     if (!arrWiThoutLastNum === arr[i]) {
-//       result = arr[i];
-//     }
-//   }
-
-//   return +result;
-// };
-
 const findeDiferentNum = function (arr) {
   const sorted = arr.slice().sort((a, b) => a - b);
   const l = sorted.length;
