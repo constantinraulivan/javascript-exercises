@@ -488,27 +488,92 @@ console.log("Exercise 33 result:", findMiddleCharacter("abcdef1234"));
 
 // 34. Given two integers a and b, which can be positive or negative, find the sum of all the integers between and including them and return it. If the two numbers are equal return a or b.
 
-// 35. Given two integers a and b, which can be positive or negative, find the sum of all the integers between and including them and return it. If the two numbers are equal return a or b.
+const sumOfIntegers = (a, b) => {
+  if (a === b) return a;
 
-// 36. Given a string, you have to return a string in which each character (case-sensitive) is repeated once.
+  let sum = 0;
 
-// 37. Given an array of integers as strings and numbers, return the sum of the array values as if all were numbers. Return your answer as a number.
+  for (let i = Math.min(a, b); i <= Math.max(a, b); i++) sum += i;
 
-// 38. Write a function that takes an array of numbers (integers for the tests) and a target number. It should find two different items in the array that, when added together, give the target value. The indices of these items should then be returned in a tuple / list (depending on your language) like so: (index1, index2).
+  return sum;
+};
 
-// For the purposes of this kata, some tests may have multiple answers; any valid solutions will be accepted.
+console.log("Exercise 34 result:", sumOfIntegers(-3, 4));
+
+// 35. Given a string, you have to return a string in which each character (case-sensitive) is repeated once.
+
+const uniqueCharacters = str => [...new Set(str.toLowerCase().split(""))].join("");
+
+console.log("Exercise 35 result:", uniqueCharacters("This is an example."));
+
+// 36. Given an array of integers as strings and numbers, return the sum of the array values as if all were numbers. Return your answer as a number.
+
+const sumArrayValues = arr => arr.reduce((acc, current) => acc + +current, 0);
+
+console.log("Exercise 36 result:", sumArrayValues([1, "2", "3", 4, "5"]));
+
+// 37. Write a function that takes an array of numbers (integers for the tests) and a target number. It should find two different items in the array that, when added together, give the target value. The indices of these items should then be returned in a tuple / list (depending on your language) like so: (index1, index2).
 
 // The input will always be valid (numbers will be an array of length 2 or greater, and all of the items will be numbers; target will always be the sum of two different items from that array).
 
-// 39. The goal of this exercise is to convert a string to a new string where each character in the new string is "(" if that character appears only once in the original string, or ")" if that character appears more than once in the original string. Ignore capitalization when determining if a character is a duplicate.
+const sumOfTwoNum = (arr, num) => {
+  for (let i = 0; i < arr.length - 1; i++) {
+    for (let j = i + 1; j < arr.length; j++) {
+      if (arr[i] + arr[j] === num) {
+        return [arr.indexOf(arr[i]), arr.indexOf(arr[j])];
+      }
+    }
+  }
+};
 
-// 40. Define String.prototype.toAlternatingCase (or a similar function/method such as to_alternating_case/toAlternatingCase/ToAlternatingCase in your selected language; see the initial solution for details) such that each lowercase letter becomes uppercase and each uppercase letter becomes lowercase. For example:
+console.log("Exercise 37 result:", sumOfTwoNum([11, 16, 35, 7, 24, 5, 14, 9], 18));
 
-// 41. You are given an odd-length array of integers, in which all of them are the same, except for one single number. Complete the method which accepts such an array, and returns that single different number.
+// 38. The goal of this exercise is to convert a string to a new string where each character in the new string is "(" if that character appears only once in the original string, or ")" if that character appears more than once in the original string. Ignore capitalization when determining if a character is a duplicate.
 
-// 42. You will be given an array of numbers. You have to sort the odd numbers in ascending order while leaving the even numbers at their original positions.
+const convertToNewStr = str => {
+  let uniqueCharacters = [];
+  let result = [];
+  for (let i = 0; i < str.length; i++) {
+    if (uniqueCharacters.includes(str[i])) {
+      result.push(")");
+    } else {
+      uniqueCharacters.push(str[i]);
+      result.push("(");
+    }
+  }
 
-// 43. Given a string of words, you need to find the highest scoring word. Each letter of a word scores points according to its position in the alphabet: a = 1, b = 2, c = 3 etc.
+  return result.join("");
+};
+console.log("Exercise 38 result:", convertToNewStr("This is an example."));
+
+// 39. Define String.prototype.toAlternatingCase (or a similar function/method such as to_alternating_case/toAlternatingCase/ToAlternatingCase in your selected language; see the initial solution for details) such that each lowercase letter becomes uppercase and each uppercase letter becomes lowercase.
+
+// 40. You are given an odd-length array of integers, in which all of them are the same, except for one single number. Complete the method which accepts such an array, and returns that single different number.
+
+// const findeDiferentNum = function (arr) {
+//   const arrWiThoutLastNum = arr[arr.length - 1];
+//   let result = 0;
+//   for (let i = 0; i < arr.length - 1; i++) {
+//     if (!arrWiThoutLastNum === arr[i]) {
+//       result = arr[i];
+//     }
+//   }
+
+//   return +result;
+// };
+
+const findeDiferentNum = function (arr) {
+  const sorted = arr.slice().sort((a, b) => a - b);
+  const l = sorted.length;
+
+  return sorted[0] !== sorted[1] ? sorted[0] : sorted[l - 1];
+};
+
+console.log("Exercise 40 result:", findeDiferentNum([1, 1, 1, 1, 1, 12, 1, 1, 1, 1]));
+
+// 41. You will be given an array of numbers. You have to sort the odd numbers in ascending order while leaving the even numbers at their original positions.
+
+// 42. Given a string of words, you need to find the highest scoring word. Each letter of a word scores points according to its position in the alphabet: a = 1, b = 2, c = 3 etc.
 
 // For example, the score of abad is 8 (1 + 2 + 1 + 4).
 
