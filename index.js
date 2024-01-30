@@ -149,6 +149,23 @@ const checkNum = (num, arr) =>
 console.log("Exercise 6 result:", checkNum(1, [1, 2, 3, 4, 5, 6, 7]));
 
 // 7. Create a JavaScript function that takes a number and returns its factorial.
+// ❓ Factorialul unui număr este produsul tuturor numerelor întregi pozitive mai mici sau egale cu acel număr.
+
+const factorial = function (num) {
+  if (num < 0) return "Factorial is not defined for negative numbers.";
+  let result = 1;
+
+  if (num === 0 || num === 1) {
+    return 1;
+  } else {
+    for (let i = 2; i <= num; i++) {
+      result *= i;
+    }
+    return result;
+  }
+};
+
+console.log("Exercise 7 result:", factorial(8));
 
 // 8. Design a JavaScript function that takes an array of numbers and returns the first duplicate element. If no duplicate exists, return null.
 
@@ -297,7 +314,39 @@ console.log("Exercise 17 result:", reverseWords("This is an Example"));
 
 // 18. Create a function that accesses properties of an object and extracts their values.
 
+const extractPropertyValues = function (obj) {
+  if (typeof obj !== "object" || obj === null) {
+    return "Input is not a valid object.";
+  }
+  const values = [];
+
+  for (let i = 0; i < Object.keys(obj).length; i++) {
+    const key = Object.keys(obj)[i];
+    values.push(obj[key]);
+  }
+
+  return values;
+};
+
+console.log(
+  "Exercise 18 result:",
+  extractPropertyValues({
+    name: "John",
+    age: 25,
+    city: "New York"
+  })
+);
+
 // 19. Develop a constructor function named "Book" that takes parameters "title" and "author" and creates an object with these properties.
+
+function Book(title, author) {
+  this.title = title;
+  this.author = author;
+}
+
+const myBook = new Book("Atomic Habits", "James Clear");
+
+console.log("Exercise 19 result:", myBook);
 
 // 20. Create an object named "grupStudenti" that will contain a list of students represented as objects. Each student object should have two properties: "nume" (representing the student's name) and "note" (a list of numbers representing the student's grades). Implement a method called "calculeazaMedie" within this object that calculates the average grades for each student and displays the results.
 
@@ -328,6 +377,17 @@ grupStudenti.calculeazaMedie();
 
 // 21. Create an array of objects named "products" containing items with properties "name" and "price". Write a JavaScript function to sort these products in ascending order based on their prices.
 
+const products = [
+  { name: "Laptop", price: 1200 },
+  { name: "Smartphone", price: 800 },
+  { name: "Căști", price: 100 },
+  { name: "Aparat foto", price: 500 }
+];
+
+const sortProducts = arr => products.sort((a, b) => a.price - b.price);
+
+console.log("Exercise 21 result:", sortProducts(products));
+
 // 22. Explore the use of async/await in JavaScript to make HTTP requests to an API and handle the received data.
 
 // 23. Create a function that takes two arrays of numbers as arguments and checks if they share at least one common element.
@@ -354,6 +414,10 @@ console.log("Exercise 23 result:", checkCommonElement([1, 2, 3, 4, 5], [5, 6, 7,
 // 24. Develop a function to calculate the sum of elements in an array object. Note that the array can contain other objects.
 
 // 25. Implement a function that sorts an array of objects based on a specific property.
+
+const sortByProperty = (arr, property) => arr.sort((a, b) => a[property] - b[property]);
+
+console.log("Exercise 25 result:", sortByProperty(products, "price"));
 
 // 26. Create a JavaScript function to find and return the most frequently occurring element in an array.
 
