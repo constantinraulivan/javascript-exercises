@@ -566,3 +566,54 @@ console.log("Exercise 40 result:", findeDiferentNum([1, 1, 1, 1, 1, 12, 1, 1, 1,
 // For example, the score of abad is 8 (1 + 2 + 1 + 4).
 
 // You need to return the highest scoring word as a string. If two words score the same, return the word that appears earliest in the original string. All letters will be lowercase and all inputs will be valid.
+
+const alphabet = [
+  "a",
+  "b",
+  "c",
+  "d",
+  "e",
+  "f",
+  "g",
+  "h",
+  "i",
+  "j",
+  "k",
+  "l",
+  "m",
+  "n",
+  "o",
+  "p",
+  "q",
+  "r",
+  "s",
+  "t",
+  "u",
+  "v",
+  "w",
+  "x",
+  "y",
+  "z"
+];
+
+const calcWordScore = word => {
+  let points = 0;
+
+  word.split("").forEach(letter => {
+    const index = alphabet.indexOf(letter);
+    points += index + 1;
+  });
+
+  return points;
+};
+
+const highestScoringWord = str => {
+  let scores = [];
+
+  const wordAndScorePair = str.split(" ").forEach(word => scores.push([calcWordScore(word), word]));
+
+  const sortScores = scores.sort((a, b) => a[0] - b[0]);
+  return sortScores[sortScores.length - 1][1];
+};
+
+console.log("Exercise 42 result:", highestScoringWord("This is an example"));
