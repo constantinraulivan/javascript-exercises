@@ -413,6 +413,26 @@ console.log("Exercise 23 result:", checkCommonElement([1, 2, 3, 4, 5], [5, 6, 7,
 
 // 24. Develop a function to calculate the sum of elements in an array object. Note that the array can contain other objects.
 
+const calculateArraySum = arr => {
+  let sum = 0;
+
+  for (let i = 0; i < arr.length; i++) {
+    const element = arr[i];
+
+    if (Array.isArray(element)) {
+      sum += calculateArraySum(element);
+    } else if (typeof element === "object" && element !== null) {
+      sum += calculateArraySum(Object.values(element));
+    } else if (typeof element === "number") {
+      sum += element;
+    }
+  }
+
+  return sum;
+};
+
+console.log("Exercise 24 result:", calculateArraySum([1, 2, { a: 3, b: [4, 5, { c: 6 }], d: 7 }, 8]));
+
 // 25. Implement a function that sorts an array of objects based on a specific property.
 
 const sortByProperty = (arr, property) => arr.sort((a, b) => a[property] - b[property]);
@@ -420,6 +440,34 @@ const sortByProperty = (arr, property) => arr.sort((a, b) => a[property] - b[pro
 console.log("Exercise 25 result:", sortByProperty(products, "price"));
 
 // 26. Create a JavaScript function to find and return the most frequently occurring element in an array.
+
+const findMostFrequentElement = arr => {
+  if (!arr.length === 0) return;
+
+  const frequencyElements = {};
+
+  arr.forEach(el => {
+    if (frequencyElements.hasOwnProperty(el)) {
+      frequencyElements[el] = frequencyElements[el] + 1;
+    } else {
+      frequencyElements[el] = 1;
+    }
+  });
+
+  let mostFrequentElement = null;
+  let maxFrequency = 0;
+
+  Object.keys(frequencyElements).forEach(key => {
+    if (frequencyElements[key] > maxFrequency) {
+      mostFrequentElement = key;
+      maxFrequency = frequencyElements[key];
+    }
+  });
+
+  return mostFrequentElement;
+};
+
+console.log("Exercise 26 result:", findMostFrequentElement([1, 2, 3, 4, 1, 2, 2, 3, 4, 4, 4]));
 
 // 27. Implement a function that takes a number as an argument and returns true if it is a perfect number; otherwise, return false.
 // ❓ Numar perfect este atunci cand suma divizorilor (cu excepția sa) este egală cu numărul însuși.
@@ -624,6 +672,29 @@ const findeDiferentNum = function (arr) {
 console.log("Exercise 40 result:", findeDiferentNum([1, 1, 1, 1, 1, 12, 1, 1, 1, 1]));
 
 // 41. You will be given an array of numbers. You have to sort the odd numbers in ascending order while leaving the even numbers at their original positions.
+
+function sortOddNumbers(arr) {
+  let oddNumbers = [];
+
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] % 2 !== 0) {
+      oddNumbers.push(arr[i]);
+    }
+  }
+
+  oddNumbers.sort((a, b) => a - b);
+  let oddNumbersi = 0;
+
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] % 2 !== 0) {
+      arr[i] = oddNumbers[oddNumbersi++];
+    }
+  }
+
+  return arr;
+}
+
+console.log("Exercise 41 result:", sortOddNumbers([5, 2, 8, 3, 1, 7]));
 
 // 42. Given a string of words, you need to find the highest scoring word. Each letter of a word scores points according to its position in the alphabet: a = 1, b = 2, c = 3 etc.
 
